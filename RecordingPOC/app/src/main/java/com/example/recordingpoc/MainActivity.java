@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String getFilePath() {
         String filePath = getApplicationContext().getFilesDir().getAbsolutePath() +
-                DateFormat.format("/yyyy-MM-dd_kk-mm-ss", new Date().getTime());
+                DateFormat.format("/yyyy-MM-dd_kk-mm-ss", new Date().getTime()) + ".mp3";
         System.out.println("FILE:: " + filePath);
         return filePath;
     }
