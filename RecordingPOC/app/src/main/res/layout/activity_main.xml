@@ -1,47 +1,33 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textview_sound_recorder_heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sound Recorder"
-        android:layout_centerHorizontal="true"
-        android:textSize="32dp"
-        android:textStyle="bold"
-        android:textColor="#000"
-        android:layout_marginTop="32dp"
-        />
 
     <Button
-        android:id="@+id/button_start_recording"
+        android:id="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="101dp"
+        android:layout_marginEnd="87dp"
         android:text="Start"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="32dp"
-        android:layout_marginBottom="32dp"
-        android:layout_centerVertical="true"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_pause_recording"
+        android:id="@+id/btnStop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pause"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"/>
-
-    <Button
-        android:id="@+id/button_stop_recording"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="122dp"
+        android:layout_marginEnd="87dp"
         android:text="Stop"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="32dp"
-        android:layout_marginRight="32dp"/>
-</RelativeLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnStart" />
+</androidx.constraintlayout.widget.ConstraintLayout>
