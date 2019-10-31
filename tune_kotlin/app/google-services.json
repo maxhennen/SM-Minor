@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "837379457691",
+    "firebase_url": "https://tunekotlin.firebaseio.com",
+    "project_id": "tunekotlin",
+    "storage_bucket": "tunekotlin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837379457691:android:a497ba925312ab7c143c3e",
+        "android_client_info": {
+          "package_name": "com.example.tune_kotlin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "837379457691-4bban7n7s60830geihllmhligrag6inj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tune_kotlin",
+            "certificate_hash": "0402d9558ce6325598ae8509eaa8c9ea8a87975c"
+          }
+        },
+        {
+          "client_id": "837379457691-nqu8vn89olds434o90tdcvgf05d6msh7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCK3IK_jCevzpAvMXUSMbRkXd9cmlBUvbw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "837379457691-nqu8vn89olds434o90tdcvgf05d6msh7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

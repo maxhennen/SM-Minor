@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:background="@color/lightBlue"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.7"
+        android:fontFamily="@font/coolvetica"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:text="Genre"
+        android:textAlignment="center"
+        android:background="?android:attr/selectableItemBackground"
+        android:id="@+id/preferencesTxt"/>
+
+    <RadioButton
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:layout_weight="0.3"
+        android:buttonTint="@color/white"
+        android:id="@+id/radioBtnPreferences"/>
+
+</LinearLayout>
