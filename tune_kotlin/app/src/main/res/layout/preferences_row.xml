@@ -16,12 +16,12 @@
         android:background="?android:attr/selectableItemBackground"
         android:id="@+id/preferencesTxt"/>
 
-    <RadioButton
+    <CheckBox
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="-10dp"
         android:layout_weight="0.3"
         android:buttonTint="@color/white"
-        android:id="@+id/radioBtnPreferences"/>
+        android:id="@+id/checkboxPreferences"/>
 
 </LinearLayout>

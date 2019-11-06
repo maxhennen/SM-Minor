@@ -10,7 +10,7 @@
         android:id="@+id/include"
         layout="@layout/toolbar" />
 
-    <view class="androidx.appcompat.app.AlertController$RecycleListView"
+    <ListView
         android:id="@+id/timelineListview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

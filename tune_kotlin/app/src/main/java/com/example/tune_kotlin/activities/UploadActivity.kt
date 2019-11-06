@@ -80,7 +80,7 @@ class UploadActivity : AppCompatActivity() {
     }
 
     private fun uploadToStorage(){
-        if (!etLocation.text.toString().equals("") && !etLocation.text.toString().equals("Click here to select date")) {
+        if (!etLocation.text.toString().equals("") && etLocation.text.toString() != "" && btnDate.text.toString() != "Click here to select date") {
             val genre: String = spinnerGenre.selectedItem.toString()
 
             storage = FirebaseStorage.getInstance().reference
@@ -90,7 +90,7 @@ class UploadActivity : AppCompatActivity() {
             val currentuser: FirebaseUser? = getCurrentuser()
 
             val storageChild: String =
-                genre + "/" + file.absoluteFile.name + "::" + currentuser?.uid
+                genre + "/" + file.absoluteFile.name.replace(".mp3", "") + "::" + currentuser?.uid
             val riversRef = storage.child(storageChild)
 
             val metadata = StorageMetadata.Builder()
@@ -98,7 +98,7 @@ class UploadActivity : AppCompatActivity() {
                 .build()
 
             riversRef.putFile(uri, metadata)
-                .addOnSuccessListener { taskSnapshot ->
+                .addOnSuccessListener {
                     uploadToDatabase(currentuser, storageChild, genre)
                 }
                 .addOnFailureListener {
@@ -117,10 +117,10 @@ class UploadActivity : AppCompatActivity() {
         val date: String = btnDate.text.toString()
         val genre: Genre = Genre.valueOf(genreStr)
         val post = Post(location, user, filename, genre, date)
-        reference.setValue(post)
+        reference.child(filename).setValue(post)
 
         Toast.toast(this, "Succesfully uploaded!")
-        startActivity(Intent(this, RecordActivity::class.java))
+        startActivity(Intent(this, HomeActivity::class.java))
     }
 
     private fun start(){

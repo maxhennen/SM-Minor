@@ -13,7 +13,7 @@ import com.example.tune_kotlin.R
 //import com.example.tune_kotlin.activities.PostActivity
 import com.example.tune_kotlin.models.Post
 
-class CustomTimelineAdapter(private val context: Context, private val posts: Array<Post>) :BaseAdapter() {
+class CustomTimelineAdapter(private val context: Context, private val posts: ArrayList<Post>) :BaseAdapter() {
     override fun getItem(position: Int): Any {
         return posts[position]
     }
@@ -30,26 +30,25 @@ class CustomTimelineAdapter(private val context: Context, private val posts: Arr
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
         val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val rowView = inflater.inflate(R.layout.timeline_row, null, true)
+        if(posts.size != 0) {
+            val userTxt = rowView.findViewById(R.id.timelineUser) as TextView
+            val genreTxt = rowView.findViewById(R.id.timelineGenre) as TextView
+            val locationTxt = rowView.findViewById(R.id.timelineLocation) as TextView
 
-        val userTxt = rowView.findViewById(R.id.timelineUser) as TextView
-        val genreTxt = rowView.findViewById(R.id.timelineGenre) as TextView
-        val locationTxt = rowView.findViewById(R.id.timelineLocation) as TextView
+            userTxt.text = posts[position].user?.displayName
+            genreTxt.text = posts[position].genre?.name
+            locationTxt.text = posts[position].location
 
-        userTxt.setText(posts[position].user?.displayName)
-        genreTxt.setText(posts[position].genre?.name)
-        locationTxt.setText(posts[position].location)
 
-//        val linearLayout = rowView.findViewById<LinearLayout>(R.id.linearLayoutOnClick)
-//        linearLayout.setOnClickListener {
-//            val intent = Intent(context, PostActivity::class.java)
-//            intent.putExtra("POST_INFORMATION", posts[position])
-//            context.startActivity(intent)
-//        }
-
-        if (position % 2 == 1) {
-            rowView.setBackgroundColor(ContextCompat.getColor(context, R.color.lightBlue))
+            if (position % 2 == 1) {
+                rowView.setBackgroundColor(ContextCompat.getColor(context, R.color.lightBlue))
+            } else {
+                rowView.setBackgroundColor(ContextCompat.getColor(context, R.color.darkBlue))
+            }
         } else {
-            rowView.setBackgroundColor(ContextCompat.getColor(context, R.color.darkBlue))
+            val userTxt = rowView.findViewById(R.id.timelineUser) as TextView
+            userTxt.text = "No posts available! Check your preferences."
+
         }
 
         return rowView

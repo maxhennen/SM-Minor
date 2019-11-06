@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.widget.ImageButton
 
 import com.example.tune_kotlin.R
-//import com.example.tune_kotlin.activities.TimelineActivity
+//import com.example.tune_kotlin.activities.TimelineActivity11
 
 class HomeActivity : AppCompatActivity() {
 
@@ -19,11 +19,11 @@ class HomeActivity : AppCompatActivity() {
         val toolbar = findViewById(R.id.defaultToolbar) as Toolbar
         setSupportActionBar(toolbar)
 
-//        val btnTimeline = findViewById(R.id.homeTimeline) as ImageButton
-//        btnTimeline.setOnClickListener {
-//            val toRecord = Intent(this@HomeActivity, TimelineActivity::class.java)
-//            startActivity(toRecord)
-//        }
+        val btnTimeline = findViewById(R.id.homeTimeline) as ImageButton
+        btnTimeline.setOnClickListener {
+            val toRecord = Intent(this@HomeActivity, TimelineActivity::class.java)
+            startActivity(toRecord)
+        }
 
         val btnRecord = findViewById(R.id.homeRecord) as ImageButton
         btnRecord.setOnClickListener {
