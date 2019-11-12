@@ -1,46 +1,51 @@
 package com.example.tune_kotlin.activities
 
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
-
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.example.tune_kotlin.R
-//import com.example.tune_kotlin.activities.TimelineActivity11
+import com.example.tune_kotlin.data.Firebase
+
 
 class HomeActivity : AppCompatActivity() {
+
+    private val firebase = Firebase(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        val toolbar = findViewById(R.id.defaultToolbar) as Toolbar
+        val toolbar = findViewById<Toolbar>(R.id.defaultToolbar)
         setSupportActionBar(toolbar)
 
-        val btnTimeline = findViewById(R.id.homeTimeline) as ImageButton
+        var genres = firebase.getGenres()
+
+        val btnTimeline = findViewById<ImageButton>(R.id.homeTimeline)
         btnTimeline.setOnClickListener {
-            val toRecord = Intent(this@HomeActivity, TimelineActivity::class.java)
-            startActivity(toRecord)
+            val intent = Intent(this, TimelineDiscoverActivity::class.java)
+            intent.putExtra("IS_TIMELINE_ACTIVITY", true)
+            intent.putStringArrayListExtra("TIMELINE_GENRES", genres)
+            startActivity(intent)
         }
 
-        val btnRecord = findViewById(R.id.homeRecord) as ImageButton
+        val btnRecord = findViewById<ImageButton>(R.id.homeRecord)
         btnRecord.setOnClickListener {
             val toRecord = Intent(this@HomeActivity, RecordActivity::class.java)
             startActivity(toRecord)
         }
 
-        val btnDiscover = findViewById(R.id.homeDiscover) as ImageButton
+        val btnDiscover = findViewById<ImageButton>(R.id.homeDiscover)
         btnDiscover.setOnClickListener {
-            val toRecord = Intent(this@HomeActivity, DiscoverActivity::class.java)
-            startActivity(toRecord)
+            val toDiscover = Intent(this@HomeActivity, DiscoverActivity::class.java)
+            startActivity(toDiscover)
         }
 
-        val btnPreferences = findViewById(R.id.homePreferences) as ImageButton
+        val btnPreferences = findViewById<ImageButton>(R.id.homePreferences)
         btnPreferences.setOnClickListener {
-            val toRecord = Intent(this@HomeActivity, PreferencesActivity::class.java)
-            startActivity(toRecord)
+            val toPreferences = Intent(this@HomeActivity, PreferencesActivity::class.java)
+            startActivity(toPreferences)
         }
 
     }

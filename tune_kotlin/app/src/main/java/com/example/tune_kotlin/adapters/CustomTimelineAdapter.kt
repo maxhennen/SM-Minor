@@ -13,7 +13,7 @@ import com.example.tune_kotlin.R
 //import com.example.tune_kotlin.activities.PostActivity
 import com.example.tune_kotlin.models.Post
 
-class CustomTimelineAdapter(private val context: Context, private val posts: ArrayList<Post>) :BaseAdapter() {
+class CustomTimelineAdapter(private val context: Context, private val posts: List<Post>) :BaseAdapter() {
     override fun getItem(position: Int): Any {
         return posts[position]
     }
@@ -35,7 +35,7 @@ class CustomTimelineAdapter(private val context: Context, private val posts: Arr
             val genreTxt = rowView.findViewById(R.id.timelineGenre) as TextView
             val locationTxt = rowView.findViewById(R.id.timelineLocation) as TextView
 
-            userTxt.text = posts[position].user?.displayName
+            userTxt.text = posts[position].email
             genreTxt.text = posts[position].genre?.name
             locationTxt.text = posts[position].location
 

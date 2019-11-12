@@ -116,7 +116,7 @@ class UploadActivity : AppCompatActivity() {
         val location: String = etLocation.text.toString()
         val date: String = btnDate.text.toString()
         val genre: Genre = Genre.valueOf(genreStr)
-        val post = Post(location, user, filename, genre, date)
+        val post = Post(location, user?.email, filename, genre, date)
         reference.child(filename).setValue(post)
 
         Toast.toast(this, "Succesfully uploaded!")

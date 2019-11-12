@@ -3,6 +3,7 @@ package com.example.tune_kotlin.activities
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,7 @@ class PreferencesActivity : AppCompatActivity() {
     private lateinit var preferencesListview: ListView
     private lateinit var btnSave: Button
     private lateinit var adapter: CustomPreferencesAdapter
+    private val manager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,11 @@ class PreferencesActivity : AppCompatActivity() {
         txtToolbar.text = "preferences"
         setSupportActionBar(toolbar)
 
+        val btnProfile = findViewById<ImageButton>(R.id.btnProfile)
+        btnProfile.setOnClickListener {
+            showProfile()
+        }
+
         preferencesListview = findViewById(R.id.preferencesListview)
         adapter = CustomPreferencesAdapter(this, Genre.values(), populatePrefrences())
         preferencesListview.adapter = adapter
@@ -40,6 +47,14 @@ class PreferencesActivity : AppCompatActivity() {
         btnSave.setOnClickListener {
             savePreferences()
         }
+    }
+
+    private fun showProfile(){
+        val transaction = manager.beginTransaction()
+        val profileFragment = ProfileFragment()
+        transaction.replace(R.id.fragment_holder, profileFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     private fun populatePrefrences(): Array<Genre> {

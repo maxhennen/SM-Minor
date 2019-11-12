@@ -29,6 +29,7 @@
                 android:textSize="35dp" />
 
             <ImageButton
+                android:id="@+id/btnProfile"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="@drawable/profile_icon"/>
