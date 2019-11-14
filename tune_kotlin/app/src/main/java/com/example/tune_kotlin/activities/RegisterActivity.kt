@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import com.example.tune_kotlin.R
+import com.example.tune_kotlin.data.FirebaseAuth
 import com.example.tune_kotlin.utils.Toast
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
+import com.example.tune_kotlin.utils.Toolbar
 import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
@@ -20,18 +18,19 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var etPassword: EditText
     private lateinit var etConfirm: EditText
 
-    private lateinit var firebaseAuth: FirebaseAuth
+    private val firebaseAuth: FirebaseAuth = FirebaseAuth()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        Toolbar(this, "register")
+
+
         btnRegister = findViewById(R.id.btnRegister)
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
         etConfirm = findViewById(R.id.etConfirm)
-
-        firebaseAuth = FirebaseAuth.getInstance()
 
         btnRegister.setOnClickListener {
             register()
@@ -47,7 +46,11 @@ class RegisterActivity : AppCompatActivity() {
             if (validateEmail(email)) {
                 if (validatePassword(password)) {
                     if (password == confirm) {
-                        saveToFirebase(email, password)
+                        if(firebaseAuth.saveToFirebase(email, password)){
+                            Toast.toast(this, "You can login now!")
+                        } else {
+                            Toast.toast(this, "Something whent wrong!")
+                        }
                     } else {
                         Toast.toast(this, "Passwordfields don't match!")
                     }
@@ -71,21 +74,5 @@ class RegisterActivity : AppCompatActivity() {
         val pattern = Pattern.compile("^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$")
         val matcher = pattern.matcher(password)
         return matcher.matches()
-    }
-
-    private fun saveToFirebase(email: String, password: String) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(
-                this
-            ) { task ->
-                if (task.isSuccessful) {
-                    val intent = Intent(applicationContext, MainActivity::class.java)
-                    startActivity(intent)
-                    Toast.toast(this, "Registration succesfull!")
-                } else {
-                    println("ERORR:: " + task.exception!!.message)
-                    Toast.toast(this, "Something went wrong")
-                }
-            }
     }
 }

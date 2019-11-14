@@ -7,13 +7,13 @@
     tools:context=".activities.TimelineDiscoverActivity">
 
     <include
-        android:id="@+id/include"
-        layout="@layout/toolbar" />
+        layout="@layout/toolbar"
+        android:id="@+id/defaultToolbar"/>
 
     <ListView
         android:id="@+id/timelineListview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
+        app:layout_constraintTop_toBottomOf="@+id/defaultToolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

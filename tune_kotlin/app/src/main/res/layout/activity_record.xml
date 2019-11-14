@@ -8,8 +8,8 @@
     tools:context=".activities.RecordActivity">
 
     <include
-        android:id="@+id/include"
-        layout="@layout/toolbar" />
+        layout="@layout/toolbar"
+        android:id="@+id/defaultToolbar"/>
 
 
     <ImageButton

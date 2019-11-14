@@ -10,6 +10,7 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.tune_kotlin.R
+import com.example.tune_kotlin.utils.Toolbar
 import java.util.*
 
 class RecordActivity : AppCompatActivity() {
@@ -22,6 +23,9 @@ class RecordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record)
+
+        Toolbar(this, "record")
+
 
         btnStop = findViewById(R.id.btnStop)
         btnStart = findViewById(R.id.btnStart)

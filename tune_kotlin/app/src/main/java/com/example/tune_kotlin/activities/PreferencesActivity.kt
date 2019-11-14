@@ -7,11 +7,11 @@ import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import com.example.tune_kotlin.R
 import com.example.tune_kotlin.adapters.CustomPreferencesAdapter
 import com.example.tune_kotlin.models.Genre
 import com.example.tune_kotlin.utils.Toast
+import com.example.tune_kotlin.utils.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -29,15 +29,7 @@ class PreferencesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preferences)
 
-        val toolbar = findViewById<Toolbar>(R.id.defaultToolbar)
-        val txtToolbar = findViewById<TextView>(R.id.textViewToolbar)
-        txtToolbar.text = "preferences"
-        setSupportActionBar(toolbar)
-
-        val btnProfile = findViewById<ImageButton>(R.id.btnProfile)
-        btnProfile.setOnClickListener {
-            showProfile()
-        }
+        Toolbar(this, "preferences")
 
         preferencesListview = findViewById(R.id.preferencesListview)
         adapter = CustomPreferencesAdapter(this, Genre.values(), populatePrefrences())
@@ -47,14 +39,6 @@ class PreferencesActivity : AppCompatActivity() {
         btnSave.setOnClickListener {
             savePreferences()
         }
-    }
-
-    private fun showProfile(){
-        val transaction = manager.beginTransaction()
-        val profileFragment = ProfileFragment()
-        transaction.replace(R.id.fragment_holder, profileFragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
     }
 
     private fun populatePrefrences(): Array<Genre> {

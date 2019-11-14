@@ -11,8 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.TimelineDiscoverActivity"></activity>
-        <activity android:name=".activities.TimelineActivity" />
+        <activity android:name=".activities.ShowCommentsFragment"></activity>
+        <activity android:name=".activities.AddCommentFragment" />
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.TimelineDiscoverActivity" />
+        <activity android:name=".activities.PostActivity" />
         <activity android:name=".activities.UploadActivity" />
         <activity android:name=".activities.PreferencesActivity" />
         <activity android:name=".activities.DiscoverActivity" />

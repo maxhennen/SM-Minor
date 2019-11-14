@@ -26,6 +26,7 @@ import com.google.firebase.storage.StorageMetadata
 import java.io.File
 import com.google.firebase.database.FirebaseDatabase
 import com.example.tune_kotlin.models.Post
+import com.example.tune_kotlin.utils.Toolbar
 import com.google.firebase.database.DatabaseReference
 
 
@@ -45,6 +46,8 @@ class UploadActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_upload)
+
+        Toolbar(this, "upload")
 
         filePath = intent.getStringExtra("FILE_PATH")
 

@@ -4,30 +4,34 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import com.example.tune_kotlin.R
-import com.example.tune_kotlin.data.Firebase
+import com.example.tune_kotlin.data.GenreFirebase
+import com.example.tune_kotlin.utils.Toolbar
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 
 class HomeActivity : AppCompatActivity() {
 
-    private val firebase = Firebase(this)
+    private val firebase = GenreFirebase()
+    private val genres = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        val toolbar = findViewById<Toolbar>(R.id.defaultToolbar)
-        setSupportActionBar(toolbar)
+        Toolbar(this, "home")
 
-        var genres = firebase.getGenres()
+        firebase.getGenres()
 
         val btnTimeline = findViewById<ImageButton>(R.id.homeTimeline)
         btnTimeline.setOnClickListener {
-            val intent = Intent(this, TimelineDiscoverActivity::class.java)
-            intent.putExtra("IS_TIMELINE_ACTIVITY", true)
-            intent.putStringArrayListExtra("TIMELINE_GENRES", genres)
-            startActivity(intent)
+            if(genres.isNotEmpty()) {
+                val intent = Intent(this, TimelineDiscoverActivity::class.java)
+                intent.putExtra("IS_TIMELINE_ACTIVITY", true)
+                intent.putStringArrayListExtra("TIMELINE_GENRES", genres)
+                startActivity(intent)
+            }
         }
 
         val btnRecord = findViewById<ImageButton>(R.id.homeRecord)
@@ -50,4 +54,18 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe
+    fun onEvent(genre: String){
+        genres.add(genre)
+    }
 }

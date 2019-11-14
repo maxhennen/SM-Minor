@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.tune_kotlin.R
+import com.example.tune_kotlin.activities.PostActivity
 //import com.example.tune_kotlin.activities.PostActivity
 import com.example.tune_kotlin.models.Post
 
@@ -49,6 +50,12 @@ class CustomTimelineAdapter(private val context: Context, private val posts: Lis
             val userTxt = rowView.findViewById(R.id.timelineUser) as TextView
             userTxt.text = "No posts available! Check your preferences."
 
+        }
+
+        rowView.setOnClickListener{
+            val intent = Intent(context, PostActivity::class.java)
+            intent.putExtra("POST_INFORMATION", posts[position])
+            context.startActivity(intent)
         }
 
         return rowView
