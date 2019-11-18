@@ -6,9 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import com.example.tune_kotlin.R
-import com.example.tune_kotlin.utils.Toast
 import com.example.tune_kotlin.utils.Toolbar
-import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 

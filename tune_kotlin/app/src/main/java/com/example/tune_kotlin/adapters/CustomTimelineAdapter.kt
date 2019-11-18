@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.tune_kotlin.R
 import com.example.tune_kotlin.activities.PostActivity
-//import com.example.tune_kotlin.activities.PostActivity
 import com.example.tune_kotlin.models.Post
 
 class CustomTimelineAdapter(private val context: Context, private val posts: List<Post>) :BaseAdapter() {
@@ -31,6 +29,7 @@ class CustomTimelineAdapter(private val context: Context, private val posts: Lis
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
         val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val rowView = inflater.inflate(R.layout.timeline_row, null, true)
+
         if(posts.size != 0) {
             val userTxt = rowView.findViewById(R.id.timelineUser) as TextView
             val genreTxt = rowView.findViewById(R.id.timelineGenre) as TextView
@@ -60,5 +59,4 @@ class CustomTimelineAdapter(private val context: Context, private val posts: Lis
 
         return rowView
     }
-
 }

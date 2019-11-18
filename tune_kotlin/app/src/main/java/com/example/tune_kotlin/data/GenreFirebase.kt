@@ -1,28 +1,29 @@
 package com.example.tune_kotlin.data
 
 import android.annotation.SuppressLint
-import com.example.tune_kotlin.models.Genre
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import durdinapps.rxfirebase2.DataSnapshotMapper
-import durdinapps.rxfirebase2.RxFirebaseDatabase
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import org.greenrobot.eventbus.EventBus
 
 
 class GenreFirebase(): Firebase() {
 
+    val referenceGenre = reference.child("preferences/" + currentUser?.uid)
+
     @SuppressLint("CheckResult")
     fun getGenres() {
-        RxFirebaseDatabase.observeSingleValueEvent(
-            reference.child("preferences/" + currentUser?.uid),
-            DataSnapshotMapper.listOf<Genre>(Genre::class.java)
-        )
-            .subscribe { blogPost ->
-                blogPost.map { genre ->
-                    EventBus.getDefault().post(genre.name)
+
+        referenceGenre.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                dataSnapshot.children.map { genre ->
+                    EventBus.getDefault().post(genre.value)
                 }
             }
+
+            override fun onCancelled(error: DatabaseError) {
+                println(error.message)
+            }
+        })
     }
 }

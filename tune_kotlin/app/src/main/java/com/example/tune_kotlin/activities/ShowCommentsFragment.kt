@@ -10,9 +10,7 @@ import com.example.tune_kotlin.R
 import com.example.tune_kotlin.adapters.CustomCommentAdapter
 import com.example.tune_kotlin.models.Comment
 
-class ShowCommentsFragment(comments: ArrayList<Comment>?) : Fragment() {
-
-    private val comments = comments
+class ShowCommentsFragment(private val comments: ArrayList<Comment>?) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,7 +22,7 @@ class ShowCommentsFragment(comments: ArrayList<Comment>?) : Fragment() {
         val showCommentsView = inflater.inflate(R.layout.activity_show_comments_fragment, container, false)
 
         val listviewComments = showCommentsView.findViewById<ListView>(R.id.listViewComments)
-        val adapter = CustomCommentAdapter(showCommentsView.context, comments)
+        val adapter = CustomCommentAdapter(this.activity!!, comments)
         listviewComments.adapter = adapter
 
         return showCommentsView

@@ -1,16 +1,15 @@
 package com.example.tune_kotlin.activities
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.tune_kotlin.R
 import com.example.tune_kotlin.data.FirebaseAuth
+import com.example.tune_kotlin.data.FirebaseNotification
 import com.example.tune_kotlin.data.PostFirebase
 import com.example.tune_kotlin.models.Comment
 import com.example.tune_kotlin.models.Post
@@ -58,6 +57,8 @@ class AddCommentFragment(post: Post) : Fragment() {
             post.comments = ArrayList()
         }
         post.comments?.add(comment)
+        activity?.applicationContext?.let { FirebaseNotification().send(post, comment, it) }
+
         if(postFirebase.updatePost(post)){
             etComment.text.clear()
         }

@@ -1,6 +1,5 @@
 package com.example.tune_kotlin.activities
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -28,8 +27,8 @@ class RegisterActivity : AppCompatActivity() {
 
 
         btnRegister = findViewById(R.id.btnRegister)
-        etEmail = findViewById(R.id.etEmail)
-        etPassword = findViewById(R.id.etPassword)
+        etEmail = findViewById(R.id.etEmailRegister)
+        etPassword = findViewById(R.id.etPasswordRegister)
         etConfirm = findViewById(R.id.etConfirm)
 
         btnRegister.setOnClickListener {

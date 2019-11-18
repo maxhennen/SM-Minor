@@ -28,7 +28,6 @@ class CustomCommentAdapter(private val context: Context, private val comments: A
         val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val rowView = inflater.inflate(R.layout.comment_row, null, true)
 
-
         if(comments?.isNotEmpty()!!) {
             val userTxt = rowView.findViewById(R.id.commentUser) as TextView
             val genreTxt = rowView.findViewById(R.id.commentContent) as TextView

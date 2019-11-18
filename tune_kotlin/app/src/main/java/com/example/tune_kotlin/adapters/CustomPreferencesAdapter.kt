@@ -1,71 +1,67 @@
 package com.example.tune_kotlin.adapters
 
-import android.annotation.SuppressLint
-import android.app.Activity
+import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.CheckBox
-import android.widget.RadioButton
+import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import com.example.tune_kotlin.R
 import com.example.tune_kotlin.models.Genre
 
-class CustomPreferencesAdapter(private val context: Activity, private val genres: Array<Genre>, private val preferences: Array<Genre>) :
-    BaseAdapter() {
+class CustomPreferencesAdapter(private val context: Context, private val preferences: ArrayList<String>) : BaseAdapter() {
+
+    private val genres = Genre.values()
+
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val view: View?
+        val viewHolder: ViewHolder
+        val inflater: LayoutInflater
+                = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+        if(convertView == null){
+            view = inflater.inflate(R.layout.preferences_row, parent, false)
+            viewHolder = ViewHolder()
+            viewHolder.genre = view.findViewById(R.id.preferencesTxt)
+            viewHolder.checkbox = view.findViewById(R.id.checkboxPreferences)
+
+            view.tag = viewHolder
+        } else {
+            view = convertView
+            viewHolder = convertView.tag as ViewHolder
+        }
+
+        val genreTxt = viewHolder.genre
+        val checkBox = viewHolder.checkbox
+
+        preferences.map { genre ->
+            if(genre == genres[position].name){
+                checkBox.isChecked = true
+            }
+        }
+
+        checkBox.setOnClickListener {
+            checkBox.isChecked = !checkBox.isChecked
+        }
+        return view!!
+    }
+
     override fun getItem(position: Int): Any {
         return genres[position]
     }
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
-
     }
 
     override fun getCount(): Int {
         return genres.size
     }
 
-    private val newPreferences: ArrayList<Genre> = ArrayList()
-
-    @SuppressLint("ViewHolder")
-    override fun getView(position: Int, view: View?, parent: ViewGroup): View {
-        val inflater = context.layoutInflater
-        val rowView = inflater.inflate(R.layout.preferences_row, null, true)
-
-        val genreTxt = rowView.findViewById(R.id.preferencesTxt) as TextView
-
-        genreTxt.text = genres[position].toString()
-
-        val radioButton = rowView.findViewById<CheckBox>(R.id.checkboxPreferences)
-
-        for (genre in preferences) {
-            if (genres[position] === genre) {
-                radioButton.isChecked = true
-                newPreferences.add(genre)
-            }
-        }
-
-        radioButton.setOnClickListener {
-            if(radioButton.isChecked){
-                newPreferences.add(Genre.valueOf(genreTxt.text.toString()))
-            } else {
-                newPreferences.remove(Genre.valueOf(genreTxt.text.toString()))
-            }
-        }
-
-        if (position % 2 == 1) {
-            rowView.setBackgroundColor(ContextCompat.getColor(context, R.color.lightBlue))
-        } else {
-            rowView.setBackgroundColor(ContextCompat.getColor(context, R.color.darkBlue))
-        }
-
-        return rowView
+    private class ViewHolder {
+        lateinit var genre: TextView
+        lateinit var checkbox: CheckBox
     }
-
-    fun getPreferences(): ArrayList<Genre>{
-        return newPreferences
-    }
-
 }

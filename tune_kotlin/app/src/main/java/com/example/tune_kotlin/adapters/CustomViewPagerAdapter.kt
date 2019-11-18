@@ -1,17 +1,9 @@
 package com.example.tune_kotlin.adapters
 
-import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.tune_kotlin.activities.AddCommentFragment
-import com.example.tune_kotlin.activities.ShowCommentsFragment
 import com.example.tune_kotlin.models.Post
-import android.content.Context.LAYOUT_INFLATER_SERVICE
-import androidx.core.content.ContextCompat.getSystemService
-import android.view.LayoutInflater
-
-
 
 
 class CustomViewPagerAdapter(fm: FragmentManager, post: Post) : FragmentPagerAdapter(fm) {
@@ -21,7 +13,8 @@ class CustomViewPagerAdapter(fm: FragmentManager, post: Post) : FragmentPagerAda
     private val mFragmentList = ArrayList<Fragment>()
     private val mFragmentTitleList = ArrayList<String>()
 
-    override fun getItem(position: Int): Fragment? {
+
+    override fun getItem(position: Int): Fragment {
         return mFragmentList[position]
     }
 

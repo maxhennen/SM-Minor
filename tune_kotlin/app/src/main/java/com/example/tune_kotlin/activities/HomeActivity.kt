@@ -5,15 +5,20 @@ import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tune_kotlin.R
+import com.example.tune_kotlin.data.FirebaseNotification
 import com.example.tune_kotlin.data.GenreFirebase
+import com.example.tune_kotlin.models.Genre
 import com.example.tune_kotlin.utils.Toolbar
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
 
 class HomeActivity : AppCompatActivity() {
 
-    private val firebase = GenreFirebase()
     private val genres = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +27,7 @@ class HomeActivity : AppCompatActivity() {
 
         Toolbar(this, "home")
 
-        firebase.getGenres()
+        GenreFirebase().getGenres()
 
         val btnTimeline = findViewById<ImageButton>(R.id.homeTimeline)
         btnTimeline.setOnClickListener {
@@ -49,6 +54,7 @@ class HomeActivity : AppCompatActivity() {
         val btnPreferences = findViewById<ImageButton>(R.id.homePreferences)
         btnPreferences.setOnClickListener {
             val toPreferences = Intent(this@HomeActivity, PreferencesActivity::class.java)
+            toPreferences.putExtra("PREFERENCES_GENRES", genres)
             startActivity(toPreferences)
         }
 
@@ -66,6 +72,7 @@ class HomeActivity : AppCompatActivity() {
 
     @Subscribe
     fun onEvent(genre: String){
+        FirebaseNotification().init(genre)
         genres.add(genre)
     }
 }
