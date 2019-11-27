@@ -20,7 +20,6 @@ class TimelineDiscoverActivity : AppCompatActivity() {
     private lateinit var adapter: BaseAdapter
     private var posts = ArrayList<Post>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_timeline_discover)
@@ -29,7 +28,7 @@ class TimelineDiscoverActivity : AppCompatActivity() {
 
         val isTimeline = intent.getBooleanExtra("IS_TIMELINE_ACTIVITY", false)
 
-        listviewTimeline = this.findViewById(R.id.timelineListview)
+        listviewTimeline = findViewById(R.id.timelineListview)
         val genres: ArrayList<String>
 
         if (isTimeline) {

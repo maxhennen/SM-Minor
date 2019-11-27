@@ -16,7 +16,6 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import java.util.*
 
-
 class NotificationService: FirebaseMessagingService() {
 
     private val ADMIN_CHANNEL_ID = "admin_channel"

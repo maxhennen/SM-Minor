@@ -12,6 +12,7 @@ class Post() :Serializable {
     var genre: Genre? = null
     var comments: ArrayList<Comment>? = null
     var date: String? = null
+    var bytes: ByteArray? = null
 
     constructor(location: String, email: String?, filename: String, genre: Genre, date: String, comments: ArrayList<Comment>): this(){
         this.location = location

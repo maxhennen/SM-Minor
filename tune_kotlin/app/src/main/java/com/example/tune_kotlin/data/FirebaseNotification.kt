@@ -5,7 +5,6 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.tune_kotlin.models.Comment
-import com.example.tune_kotlin.models.Genre
 import com.example.tune_kotlin.models.Post
 import com.google.firebase.messaging.FirebaseMessaging
 import org.json.JSONException
@@ -16,21 +15,21 @@ class FirebaseNotification: Firebase() {
     private val serverKey = "key=" + "AAAAwve0gps:APA91bHcx96Mz4TxNx5pPa4PToVLsEkq_kRlSEQWsSlk5f52A6ZSmLsw_ucqXmMH-DMAvSZH3A6IZooRRCDhPeb0qs6dF6BYIVDuhuNwq6G9_BpNZWMHB4UwO4h58CTB3y_2d9h-pQCM"
     private val FCM_API = "https://fcm.googleapis.com/fcm/send"
 
-    fun init(genre: String) {
-        FirebaseMessaging.getInstance().subscribeToTopic("/topics/$genre")
+    fun init() {
+        val receiver = currentUser!!.email?.replace("@", "%")
+        FirebaseMessaging.getInstance().subscribeToTopic("/topics/$receiver")
     }
 
     fun send(post: Post, comment: Comment, application: Context){
-        val topic = post.genre?.name
-
         val notification = JSONObject()
         val notificationBody = JSONObject()
         val message = comment.user + " has commented on your post!"
+        val receiver = post.email?.replace("@", "%")
 
         try{
             notificationBody.put("title", "tune message")
             notificationBody.put("message", message)
-            notification.put("to", "/topics/$topic")
+            notification.put("to", "/topics/$receiver")
             notification.put("data", notificationBody)
         } catch (e: JSONException){
             e.printStackTrace()

@@ -72,7 +72,6 @@ class HomeActivity : AppCompatActivity() {
 
     @Subscribe
     fun onEvent(genre: String){
-        FirebaseNotification().init(genre)
         genres.add(genre)
     }
 }

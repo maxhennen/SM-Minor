@@ -1,0 +1,9 @@
+{
+    "name": "MyMap",
+    "short_name": "MyMap",
+    "start_url": "/index",
+    "display": "standalone",
+    "background_color": "#FFE92D",
+    "theme_color": "FFEC14",
+    "orientation": "portrait-primary"
+}

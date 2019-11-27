@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import com.example.tune_kotlin.R
+import com.example.tune_kotlin.data.FirebaseNotification
 import com.example.tune_kotlin.utils.Toolbar
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         } else {
+            FirebaseNotification().init()
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }

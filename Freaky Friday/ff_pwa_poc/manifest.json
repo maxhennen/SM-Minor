@@ -1,0 +1,9 @@
+{
+    "name": "Food Ninja",
+    "short_name": "FN",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#FFE92D",
+    "theme_color": "#FFE1C4",
+    "orientation": "landscape"
+}
