@@ -1,12 +1,14 @@
 var bucketlist = window.localStorage.getItem("bucketlist");
 var areas = [];
-$.each(JSON.parse(bucketlist), function(index, item) {
-    var area = {
-        "id": item.countrycode,
-        "showAsSelected": true
-    };
-    areas.push(area);
-});
+if (bucketlist !== null) {
+    $.each(JSON.parse(bucketlist), function(index, item) {
+        var area = {
+            "id": item.countrycode,
+            "showAsSelected": true
+        };
+        areas.push(area);
+    });
+}
 
 var map = AmCharts.makeChart("mapdiv", {
     type: "map",

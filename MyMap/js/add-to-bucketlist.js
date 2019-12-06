@@ -1,18 +1,36 @@
 $(document).ready(function() {
-    var bucketlistLS = window.localStorage.getItem("bucketlist");
     var bucketlist = [];
 
-    if (bucketlistLS !== null) {
-        const list = document.querySelector(".bucketlist");
-        $.each(JSON.parse(bucketlistLS), function(index, item) {
-            bucketlist.push(item);
-            $(".bucketlist").append("<li id='" + item.locationId + "'>'" + item.label + "'</li>")
-        });
-    }
+    var updateUI = function() {
+        $(".bucketlistitem").remove();
+        var bucketlistLS = window.localStorage.getItem("bucketlist");
+        if (bucketlistLS !== null) {
+            const list = document.querySelector(".bucketlist");
+            $.each(JSON.parse(bucketlistLS), function(index, item) {
+                bucketlist.push(item);
+                console.log(item);
+                if (item.checkedOff) {
+                    $(".bucketlist").append("<li class='bucketlistitem checkedOff list-group-item' id='" + item.locationId +
+                        "' ><img src='../img/tick.png' style='width:16px;height:16px;'/>" + item.label + "</li>");
+                } else {
+                    $(".bucketlist").append("<li class='bucketlistitem list-group-item' id='" + item.locationId +
+                        "'><span style='width:16px;height:16px;'></span>" + item.label + "</li>");
+                }
+            });
+
+            $(".bucketlistitem").click(function() {
+                var countrycode = $(this).attr("id");
+                console.log(countrycode);
+            });
+        }
+    };
+
+    updateUI();
 
     $("#address-input").on("input", function() {
         var input = this.value;
         if (input.length > 3) {
+            $(".suggestions").show();
             var uri = "http://autocomplete.geocoder.api.here.com/6.2/suggest.json" +
                 "?app_id=lNS733JNJxreqczcmLri" +
                 "&app_code=yeiZrbZ75btuCILPoGSq3A" +
@@ -22,7 +40,6 @@ $(document).ready(function() {
             $.get(uri, function(data) {
                 var suggestions = data.suggestions;
                 suggestions.forEach(suggested => {
-                    console.log(suggested);
                     const div = $("<div/>", {
                         "class": "suggested",
                         "text": suggested.label,
@@ -54,7 +71,9 @@ $(document).ready(function() {
                                 if (!itemAlreadyInList) {
                                     bucketlist.push(bucketlistitem);
                                     window.localStorage.setItem("bucketlist", JSON.stringify(bucketlist));
+                                    updateUI();
                                     $(".suggested").remove();
+                                    $(".suggestions").hide();
                                 }
                             })
                         }
@@ -64,6 +83,9 @@ $(document).ready(function() {
                     suggestionsPanel.innerHTML = '';
                 }
             });
+        }
+        if (input.length === 0) {
+            $(".suggestions").hide();
         }
     });
 });
