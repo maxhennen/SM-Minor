@@ -8,7 +8,6 @@ $(document).ready(function() {
             const list = document.querySelector(".bucketlist");
             $.each(JSON.parse(bucketlistLS), function(index, item) {
                 bucketlist.push(item);
-                console.log(item);
                 if (item.checkedOff) {
                     $(".bucketlist").append("<li class='bucketlistitem checkedOff list-group-item' id='" + item.locationId +
                         "' ><img src='../img/tick.png' style='width:16px;height:16px;'/>" + item.label + "</li>");
@@ -19,8 +18,13 @@ $(document).ready(function() {
             });
 
             $(".bucketlistitem").click(function() {
-                var countrycode = $(this).attr("id");
-                console.log(countrycode);
+                var locationId = $(this).attr("id");
+                $.each(bucketlist, function(index, item) {
+                    if (item.locationId = locationId) {
+                        window.localStorage.setItem("selectedItem", JSON.stringify(item));
+                        window.location = "../pages/bucket-list-item.html";
+                    }
+                });
             });
         }
     };
@@ -59,7 +63,8 @@ $(document).ready(function() {
                                     countrycode: countryCode,
                                     location: location,
                                     checkedOff: false,
-                                    locationId: suggested.locationId
+                                    locationId: suggested.locationId,
+                                    images: []
                                 }
 
                                 var itemAlreadyInList = false;

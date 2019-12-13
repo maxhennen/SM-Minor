@@ -9,10 +9,9 @@ const assets = [
     '/css/style.css',
     '/pages/bucket-list.html',
     '/manifest.json',
-    'https://www.amcharts.com/lib/3/ammap.js',
-    'https://www.amcharts.com/lib/3/maps/js/worldHigh.js',
-    'https://www.amcharts.com/lib/3/themes/dark.js',
-
+    '/pages/bucket-list-item.html',
+    '/js/bucketlistitem.js',
+    '/img/mapNA.png',
 ];
 
 
@@ -22,7 +21,7 @@ self.addEventListener('install', evt => {
     evt.waitUntil(
         caches.open(staticCacheName).then((cache) => {
             console.log('caching shell assets');
-            cache.addAll(assets);
+            return cache.addAll(assets);
         })
     );
 });
