@@ -76,3 +76,9 @@ footer {
     visibility: hidden;
     position: absolute;
 }
+
+.container a {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
